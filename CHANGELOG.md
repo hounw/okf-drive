@@ -1,5 +1,10 @@
 # Changelog
 
+## Skill 0.2.0 · Standard 0.2 · 2026-10-26
+
+- Standard: the Inbox MUST be named `00 Inbox for <bundle folder name>`, so an agent finds it with one Drive search by exact name. Renaming a bundle renames its Inbox. Upgrade note for 0.1 bundles.
+- Skill: new "Add this to <project>" operation (find the Inbox by name, move the file), "Rename a bundle" procedure, offer to upgrade 0.1 bundles, Inbox search pattern in the tools map, self-test checks the Inbox search.
+
 ## Skill 0.1.0 · Standard 0.1 · 2026-10-20
 
 - First release.

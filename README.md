@@ -2,9 +2,9 @@
 
 A standard and an agent skill for doing project work in Google Drive with any AI agent.
 
-Every project is a Drive folder with a **README** doc (header, Structure, Index, Current state, Log) and an **Inbox** folder. Any teammate's agent (Claude, ChatGPT, Hermes, OpenClaw, Codex and others) reads the README to pick up the project, files whatever lands in the Inbox, and keeps the README current. Folders can live anywhere in Drive and be organized however each project needs.
+Every project is a Drive folder with a **README** doc (header, Structure, Index, Current state, Log) and an **Inbox** folder named after the project (`00 Inbox for <folder name>`), so an agent can drop a file into any project with one search. Any teammate's agent (Claude, ChatGPT, Hermes, OpenClaw, Codex and others) reads the README to pick up the project, files whatever lands in the Inbox, and keeps the README current. Folders can live anywhere in Drive and be organized however each project needs.
 
-- **Standard:** [SPEC.md](SPEC.md) (OKF-Drive 0.1, based on Google Cloud's [Open Knowledge Format](https://agentic-ai.readthedocs.io/en/latest/Standards/open-knowledge-format/))
+- **Standard:** [SPEC.md](SPEC.md) (OKF-Drive 0.2, based on Google Cloud's [Open Knowledge Format](https://agentic-ai.readthedocs.io/en/latest/Standards/open-knowledge-format/))
 - **Skill:** [`okf-drive/`](okf-drive/) in the open [Agent Skills](https://agentskills.io) format (`SKILL.md` + `references/`)
 - **Download:** `okf-drive.zip` from the [latest release](https://github.com/hounw/okf-drive/releases/latest)
 

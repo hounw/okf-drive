@@ -1,17 +1,17 @@
 ---
 name: okf-drive
-description: Work on projects stored in Google Drive using the OKF-Drive standard (a README doc with header, Structure, Index, Current state and Log, plus a required Inbox folder). Use when someone asks to continue, open, set up, organize or check a project in Google Drive, file or organize an inbox, convert a folder into an OKF-Drive bundle, or says "okf", "okf-drive", or "help me with OKF-Drive". Also use the first time it is installed, to guide the person through setup.
+description: Work on projects stored in Google Drive using the OKF-Drive standard (a README doc with header, Structure, Index, Current state and Log, plus a required Inbox folder named 00 Inbox for the folder name). Use when someone asks to continue, open, set up, organize or check a project in Google Drive, add or move a doc or file into a project, file or organize an inbox, convert a folder into an OKF-Drive bundle, or says "okf", "okf-drive", or "help me with OKF-Drive". Also use the first time it is installed, to guide the person through setup.
 license: MIT
 compatibility: Needs Google Drive access (search, read, create, update/move files) and Google Docs access (read and batch-update with a revision ID), through connectors, MCP servers or a CLI. A shell with Python is optional, for MarkItDown conversions.
 metadata:
-  version: "0.1.0"
-  spec-version: "0.1"
+  version: "0.2.0"
+  spec-version: "0.2"
   homepage: "https://github.com/hounw/okf-drive"
 ---
 
 # OKF-Drive
 
-You help people work on projects ("bundles") that live in Google Drive and follow the OKF-Drive standard. Any Drive folder anywhere is a bundle when its top level holds a Google Doc named `README` whose first line is `okf-drive: 0.1`, plus the Inbox folder that README names. The full standard is in [references/spec.md](references/spec.md). Read it the first time you work on a bundle in a session.
+You help people work on projects ("bundles") that live in Google Drive and follow the OKF-Drive standard. Any Drive folder anywhere is a bundle when its top level holds a Google Doc named `README` whose first line is `okf-drive: 0.2`, plus an Inbox folder named `00 Inbox for <bundle folder name>`. The full standard is in [references/spec.md](references/spec.md). Read it the first time you work on a bundle in a session.
 
 ## First, check your tools
 
@@ -27,7 +27,7 @@ If something is missing, say exactly which capability is missing and what it blo
 
 ## First run: onboarding
 
-If this is the first time the person uses this skill, or they ask for help, follow [references/onboarding.md](references/onboarding.md). It checks tools, runs a short self-test in a sandbox bundle, and teaches the person the five things they can ask for.
+If this is the first time the person uses this skill, or they ask for help, follow [references/onboarding.md](references/onboarding.md). It checks tools, runs a short self-test in a sandbox bundle, and teaches the person the six things they can ask for.
 
 ## Rules (always)
 
@@ -42,6 +42,7 @@ If this is the first time the person uses this skill, or they ask for help, foll
 9. **Follow this bundle's Structure and types.** Never impose another bundle's layout. Keep unknown header fields and sections as they are.
 10. **Language.** Reply in the person's language. Write docs in the language the README Notes set.
 11. **Listing folders:** always set a page size (e.g. 50) and follow next-page tokens; default pages can silently omit files.
+12. **Inbox by name.** A bundle's Inbox is `00 Inbox for <bundle folder name>`. To add a file to a bundle, search for that exact folder name and move the file there; don't walk the folder tree or open the README first.
 
 ## What people can ask for
 
@@ -50,8 +51,9 @@ Detailed steps are in [references/operations.md](references/operations.md).
 | Ask | Do |
 | --- | --- |
 | "Continue <project>" | Find the bundle, read README and Index, summarize state and pending items, then ask what to work on |
-| "New project: <name>" | Ask where and how it should be organized (or which bundle to copy), then create the folder, Inbox and README from [references/templates.md](references/templates.md) |
-| "Make this folder a bundle" | Inventory it, create the Inbox, draft README with a Structure describing what exists and a full Index, add headers to working docs; show the draft before marking `status: active` |
+| "New project: <name>" | Ask where and how it should be organized (or which bundle to copy), then create the folder, its `00 Inbox for <folder name>` and README from [references/templates.md](references/templates.md) |
+| "Make this folder a bundle" | Inventory it, create `00 Inbox for <folder name>`, draft README with a Structure describing what exists and a full Index, add headers to working docs; show the draft before marking `status: active` |
+| "Add this to <project>" | Search for the folder `00 Inbox for <project folder>` by exact name and move the file there; file it right away only if asked |
 | "File the inbox" | For each Inbox file and any unindexed file: identify, rename, move per Structure, summarize or convert if long, index, check contradictions, log |
 | "Check this bundle" | Run the conformance checklist in the spec; report; fix only what the person approves |
 

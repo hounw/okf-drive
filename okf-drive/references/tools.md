@@ -17,6 +17,7 @@ Optional: C7 move to Trash (`files.update trashed=true`, only with a person's ye
 
 - Find bundles: `title = 'README' and fullText contains 'okf-drive'` (Drive API v3 uses `name` instead of `title`)
 - Find one bundle: add `and fullText contains '<alias or project name>'`
+- Find a bundle's Inbox (to add a file): `title = '00 Inbox for <bundle folder name>' and mimeType = 'application/vnd.google-apps.folder' and trashed = false` (API v3: `name = ...`). Then move the file with C4.
 - List a folder: `parentId = '<folder id>'` (API v3: `'<folder id>' in parents`), `trashed = false`. Always set a page size of 50+ and follow `nextPageToken`.
 
 ## Claude (claude.ai, Cowork, desktop) with the Google Drive and Google Docs connectors

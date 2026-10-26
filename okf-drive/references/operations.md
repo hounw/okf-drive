@@ -6,7 +6,7 @@ Step-by-step procedures. All of them follow the Rules in SKILL.md. Every operati
 
 1. Find the bundle (link, or search by README + alias). If several match, ask.
 2. Read the README. Parse the header; note `inbox`, `status`, and the Notes and Structure.
-3. If `okf-drive` is a version newer than you know, say so and proceed carefully, preserving anything unfamiliar.
+3. If `okf-drive` is a version newer than you know, say so and proceed carefully, preserving anything unfamiliar. If it is `0.1`, offer to upgrade: rename the Inbox to `00 Inbox for <folder name>`, set `inbox` to match, and change the first line to `okf-drive: 0.2` (checked edit).
 4. List the Inbox. If it isn't empty, mention it ("3 files waiting in the Inbox; want me to file them?").
 5. Read the docs the person's task needs, in Index order, preferring summaries and `.md` conversions.
 6. Summarize in a few lines: what the project is, Current state, pending items, Inbox count. Ask what to work on.
@@ -14,7 +14,7 @@ Step-by-step procedures. All of them follow the Rules in SKILL.md. Every operati
 ## New project
 
 1. Ask (one message): where the folder should go (a link to the parent, or "My Drive"), the project name, and how it should be organized. Offer two options: "copy an existing bundle's Structure" or "start simple" (Inbox only, flat).
-2. Create the folder (lowercase-with-dashes name unless they prefer otherwise), the Inbox folder, and any subfolders the Structure names.
+2. Create the folder (lowercase-with-dashes name unless they prefer otherwise), its Inbox `00 Inbox for <folder name>`, and any subfolders the Structure names.
 3. Create the README from [templates.md](templates.md) with the header filled in: today's date, the person as `owner`, `status: active`.
 4. If they gave you material (a contract, notes), upload it to the Inbox and run "File the inbox".
 5. Close the session.
@@ -23,7 +23,7 @@ Step-by-step procedures. All of them follow the Rules in SKILL.md. Every operati
 
 1. List the folder recursively (page size 50+, follow tokens). Note file names, types and subfolders.
 2. If a README already exists, read it and treat this as "Check this bundle" instead.
-3. Create the Inbox (ask its name; default `00 Inbox`).
+3. Create the Inbox `00 Inbox for <folder name>`. If an old inbox folder exists under another name, offer to rename it instead.
 4. Draft the README: About from what you can infer; a Structure that describes the layout as it is (don't reorganize); a list of the doc types you see; an Index of every file with a one-line description; Current state "Converted to OKF-Drive, review pending".
 5. Show the person the draft Structure and Index in chat before writing. Apply their corrections.
 6. Write the README with `status: paused` until they approve, then set `status: active`.
@@ -45,6 +45,19 @@ For each file in the Inbox, then each unindexed file found elsewhere in the bund
 8. **Log it** at the end of the run: one Log line for the batch.
 
 Report: files filed (old name → new name, where), summaries and conversions created, contradictions to decide, files left in the Inbox and why.
+
+## Add a file to a project
+
+For "add this doc to <project>", "put this in <project>" and similar.
+
+1. **Find the Inbox in one search**: a folder named exactly `00 Inbox for <project folder name>` (see [tools.md](tools.md)). Use the folder name the person gives, or the project's alias as written.
+2. **One match**: use it. **Several** (same folder name in different places): list their locations and ask. **None**: find the bundle by its README, read `inbox`, use that folder, and offer to rename it to the standard name.
+3. **Move the file** into the Inbox (change its parent). Don't rename it yet. Files in the Inbox need no Index line.
+4. If the person wants it filed now, run "File the inbox" for that file; otherwise tell them it's waiting in the Inbox.
+
+## Rename a bundle
+
+Rename the folder and its Inbox (`00 Inbox for <new name>`) together, update `inbox` in the README with a checked edit, and close the session.
 
 ## Check this bundle
 

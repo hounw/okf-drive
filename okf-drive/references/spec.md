@@ -1,6 +1,6 @@
 # OKF-Drive specification
 
-Version 0.1 · Webifica · 2026-10-20
+Version 0.2 · Webifica · 2026-10-26
 
 OKF-Drive is a format for project knowledge stored in Google Drive. It applies the [Open Knowledge Format (OKF)](https://agentic-ai.readthedocs.io/en/latest/Standards/open-knowledge-format/) to Google Docs. It defines which documents a project folder must contain, how they are arranged and linked, and the metadata each one carries. It does not define where folders live, how they are organized internally, or which AI agent reads them.
 
@@ -14,7 +14,7 @@ The standard defines:
 - The **README**: a header and six sections, including the bundle's own Structure and the Index of every file.
 - A **metadata header** on every working doc.
 - A **type** on every README and working doc: a free value each bundle defines for itself.
-- An **Inbox**: the only place a file may sit without being indexed.
+- An **Inbox**: the only place a file may sit without being indexed, named after its bundle so any agent can find it with one search.
 - **Rules for agents** that read and write bundles.
 
 It leaves to each team: where bundles live, who owns the Drive, each bundle's folder structure and doc types, and any extra fields. Two bundles can be organized completely differently and both conform.
@@ -25,8 +25,8 @@ Working documents are Google Docs, not markdown files, because several people an
 
 A bundle is a Google Drive folder that contains, at its top level:
 
-1. A Google Doc named `README` whose first line is `okf-drive: 0.1`.
-2. The Inbox folder named in that README's `inbox` field.
+1. A Google Doc named `README` whose first line is `okf-drive: 0.2`.
+2. An Inbox folder named `00 Inbox for <bundle folder name>`, recorded in that README's `inbox` field.
 
 Nothing else makes a folder a bundle. Its location and internal layout do not matter.
 
@@ -51,11 +51,11 @@ Plain `key: value` lines at the very top of the doc, ending with a line containi
 
 | Field | Required | Meaning | Example |
 | --- | --- | --- | --- |
-| `okf-drive` | Yes | Standard version; MUST be the first line | `0.1` |
+| `okf-drive` | Yes | Standard version; MUST be the first line | `0.2` |
 | `type` | Yes | What kind of bundle this is, in the team's own words | `client-project` |
 | `title` | Yes | Human name of the project | `AcmeCo content strategy` |
 | `description` | Yes | One sentence on what the project is | `Meta Ads and content for Acme, Oct 2026 to Mar 2027` |
-| `inbox` | Yes | Name of the bundle's Inbox folder | `00 Inbox` |
+| `inbox` | Yes | Name of the bundle's Inbox folder: `00 Inbox for <bundle folder name>` | `00 Inbox for acme-co` |
 | `status` | Yes | `active`, `paused`, `done` or `archived` | `active` |
 | `owner` | Yes | Person accountable for the bundle | `Ana` |
 | `updated` | Yes | Date of the last change, `YYYY-MM-DD` | `2026-10-20` |
@@ -130,7 +130,10 @@ OKF-Drive requires a `type` on every README and working doc but defines no type 
 
 ## 7. The Inbox
 
-Every bundle has exactly one Inbox: a top-level subfolder named by the README's `inbox` field (e.g. `00 Inbox`, `Entrada`, `_drop`).
+Every bundle has exactly one Inbox: a top-level subfolder named `00 Inbox for <bundle folder name>`, where the part after `for ` is exactly the bundle folder's Drive name (folder `acme-co` → `00 Inbox for acme-co`). The README's `inbox` field holds the same name.
+
+- **Findable in one search.** To add a file to a bundle, an agent searches Drive for a folder with that exact name and moves the file there, without opening the README or walking folders.
+- **Renamed together.** Renaming a bundle folder MUST rename its Inbox and update `inbox` in the same step.
 
 - **All new material enters here.** People drop files by any means. Dropping is always safe.
 - **Filing empties it.** Filing gives each file a name, a place from the Structure, a summary or conversion if needed, an Index line and a Log line.
@@ -138,6 +141,8 @@ Every bundle has exactly one Inbox: a top-level subfolder named by the README's 
 - **Agent-created docs** are created in place and indexed in the same step, so they skip the Inbox.
 
 Apart from the Inbox, subfolders are up to each bundle and described in its Structure.
+
+**Upgrading from 0.1.** Rename the Inbox to `00 Inbox for <bundle folder name>`, set `inbox` to the new name, and change the first line to `okf-drive: 0.2`.
 
 ## 8. Rules for agents
 
@@ -154,11 +159,11 @@ Apart from the Inbox, subfolders are up to each bundle and described in its Stru
 
 ## 9. Conformance
 
-A folder conforms to OKF-Drive 0.1 when:
+A folder conforms to OKF-Drive 0.2 when:
 
 - [ ] A Google Doc named `README` sits at the folder's top level
-- [ ] Its first line is `okf-drive: 0.1` and its header has every required field, ending with `---`
-- [ ] The folder named in `inbox` exists at the top level
+- [ ] Its first line is `okf-drive: 0.2` and its header has every required field, ending with `---`
+- [ ] A top-level folder named `00 Inbox for <bundle folder name>` exists, and `inbox` holds that name
 - [ ] The README has About, Notes, Structure, Index, Current state and Log, in that order
 - [ ] Every file and child bundle outside the Inbox appears in the Index with a link and one line
 - [ ] Files sit where the Structure says
@@ -168,7 +173,7 @@ A folder conforms to OKF-Drive 0.1 when:
 
 ## 10. Mapping to OKF
 
-| OKF v0.1 | OKF-Drive 0.1 |
+| OKF v0.1 | OKF-Drive 0.2 |
 | --- | --- |
 | Bundle: a directory tree of markdown files | Bundle: a Drive folder with a README doc and an Inbox |
 | `index.md` per directory | `README` doc per bundle |
@@ -177,18 +182,20 @@ A folder conforms to OKF-Drive 0.1 when:
 | Markdown links form a graph | Drive links in the Index and inside docs |
 | Optional `log.md` | Log section, overflowing to a `LOG` doc |
 | Producer conventions | Structure section in each README |
-| (none) | Required Inbox |
+| (none) | Required Inbox, named after the bundle |
 
 A bundle can be exported to plain OKF markdown, one `.md` per doc with the header turned into frontmatter.
 
 ## 11. Example README
 
+For a bundle folder named `acme-co`:
+
 ```
-okf-drive: 0.1
+okf-drive: 0.2
 type: client-project
 title: AcmeCo content strategy
 description: Meta Ads and content for Acme, Oct 2026 to Mar 2027
-inbox: 00 Inbox
+inbox: 00 Inbox for acme-co
 status: active
 owner: Ana
 updated: 2026-10-20
@@ -202,7 +209,7 @@ Notes
 Docs in formal Spanish ("usted"). Deliverables approved by their marketing lead.
 
 Structure
-- 00 Inbox/: drop anything here; filed by the agent
+- 00 Inbox for acme-co/: drop anything here; filed by the agent
 - Reference/: client files as received, named "YYYY-MM-DD <What> (from <source>)", plus summaries and .md conversions
 - Deliverables/: work we send the client
 - Types: brief (goals, scope, deadlines), customer-profile (audience, voice, competitors),

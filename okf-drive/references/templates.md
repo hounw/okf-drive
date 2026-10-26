@@ -5,11 +5,11 @@ Create Google Docs from these as plain text (one line per paragraph). Replace ev
 ## README
 
 ```
-okf-drive: 0.1
+okf-drive: 0.2
 type: <bundle type, e.g. client-project>
 title: <project name>
 description: <one sentence>
-inbox: 00 Inbox
+inbox: 00 Inbox for <bundle folder name>
 status: active
 owner: <person>
 updated: <YYYY-MM-DD>
@@ -23,7 +23,7 @@ Notes
 <Language for docs, tone, who approves, things to never do. "None yet." is fine.>
 
 Structure
-- 00 Inbox/: drop anything here; the agent files it
+- 00 Inbox for <bundle folder name>/: drop anything here; the agent files it
 - <subfolder>/: <what goes there>
 - Types: <type> (<what it holds>), <type> (<what it holds>)
 
