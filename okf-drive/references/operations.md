@@ -7,7 +7,7 @@ Step-by-step procedures. All of them follow the Rules in SKILL.md. Every operati
 1. Find the bundle (link, or search by README + alias). If several match, ask.
 2. Read the README. Parse the header; note `inbox`, `status`, and the Notes and Structure.
 3. If `okf-drive` is a version newer than you know, say so and proceed carefully, preserving anything unfamiliar. If it is `0.1`, offer to upgrade: rename the Inbox to `00 Inbox for <folder name>`, set `inbox` to match, and change the first line to `okf-drive: 0.2` (checked edit).
-4. List the Inbox. If it isn't empty, mention it ("3 files waiting in the Inbox; want me to file them?").
+4. List the Inbox and read each file's description. Files tagged `okf-move-to` are in transit, not new ([mover.md](mover.md)). If new files are waiting, mention it ("3 files waiting in the Inbox; want me to file them?"). Report stale or `okf-move-error` tags.
 5. Read the docs the person's task needs, in Index order, preferring summaries and `.md` conversions.
 6. Summarize in a few lines: what the project is, Current state, pending items, Inbox count. Ask what to work on.
 
@@ -33,18 +33,18 @@ Step-by-step procedures. All of them follow the Rules in SKILL.md. Every operati
 
 ## File the inbox
 
-For each file in the Inbox, then each unindexed file found elsewhere in the bundle:
+For each file in the Inbox that isn't in transit (tagged `okf-move-to`), then each unindexed file found elsewhere in the bundle:
 
 1. **Read it.** Large or thin read: follow [large-files.md](large-files.md).
 2. **Identify it**: what it is, who it's from, its date. Can't tell (empty file, unnamed image)? Leave it in the Inbox and add it to the report.
 3. **Name it** by the Structure's rule, else the default `YYYY-MM-DD <What it is> (from <source>)`.
-4. **Move it** where the Structure says. If the Structure has no place for it, ask (and offer to add a line to the Structure).
+4. **Move it** where the Structure says. If the Structure has no place for it, ask (and offer to add a line to the Structure). If the move is refused (e.g. in a Shared Drive), follow [mover.md](mover.md): tag it for the mover if one runs for this bundle, otherwise offer the fallbacks. Either way, keep filing.
 5. **Summarize** if longer than a couple of pages: create `<What it is> - summary` as a Google Doc with header (`type` from Structure, `source` link) next to it.
-6. **Index it**: add a line (and one for its summary or `.md`) in the right Index group, using a checked edit.
+6. **Index it**: add a line (and one for its summary or `.md`) in its destination's Index group, using a checked edit, even if it is still in transit.
 7. **Check contradictions** with existing docs (e.g. a brandbook says formal tone, the Customer Profile says casual). Don't change the existing doc; list it for the person.
 8. **Log it** at the end of the run: one Log line for the batch.
 
-Report: files filed (old name → new name, where), summaries and conversions created, contradictions to decide, files left in the Inbox and why.
+Report: files filed (old name → new name, where), files in transit (the mover moves them within minutes), summaries and conversions created, contradictions to decide, files left in the Inbox and why.
 
 ## Add a file to a project
 
@@ -52,7 +52,7 @@ For "add this doc to <project>", "put this in <project>" and similar.
 
 1. **Find the Inbox in one search**: a folder named exactly `00 Inbox for <project folder name>` (see [tools.md](tools.md)). Use the folder name the person gives, or the project's alias as written.
 2. **One match**: use it. **Several** (same folder name in different places): list their locations and ask. **None**: find the bundle by its README, read `inbox`, use that folder, and offer to rename it to the standard name.
-3. **Move the file** into the Inbox (change its parent). Don't rename it yet. Files in the Inbox need no Index line.
+3. **Move the file** into the Inbox (change its parent). Don't rename it yet. Files in the Inbox need no Index line. If the move is refused (e.g. in a Shared Drive), copy it into the Inbox (C9) and offer to trash the original with the person's yes, or ask them to drag it there. The mover can't help here: it only moves files within a bundle.
 4. If the person wants it filed now, run "File the inbox" for that file; otherwise tell them it's waiting in the Inbox.
 
 ## Rename a bundle
@@ -61,7 +61,7 @@ Rename the folder and its Inbox (`00 Inbox for <new name>`) together, update `in
 
 ## Check this bundle
 
-Run the conformance checklist in [spec.md](spec.md) §9 and report pass/fail per item, with specifics (e.g. "3 files in Reference aren't in the Index", "doc 'Notes v2' has no header"). Offer fixes as a list. Apply only the ones the person approves.
+Run the conformance checklist in [spec.md](spec.md) §9 and report pass/fail per item, with specifics (e.g. "3 files in Reference aren't in the Index", "doc 'Notes v2' has no header"). Also report files in transit for over an hour and `okf-move-error` tags ([mover.md](mover.md)). Offer fixes as a list. Apply only the ones the person approves.
 
 ## Close the session
 

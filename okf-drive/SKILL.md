@@ -2,10 +2,10 @@
 name: okf-drive
 description: Work on projects stored in Google Drive using the OKF-Drive standard (a README doc with header, Structure, Index, Current state and Log, plus a required Inbox folder named 00 Inbox for the folder name). Use when someone asks to continue, open, set up, organize or check a project in Google Drive, add or move a doc or file into a project, file or organize an inbox, convert a folder into an OKF-Drive bundle, or says "okf", "okf-drive", or "help me with OKF-Drive". Also use the first time it is installed, to guide the person through setup.
 license: MIT
-compatibility: Needs Google Drive access (search, read, create, update/move files) and Google Docs access (read and batch-update with a revision ID), through connectors, MCP servers or a CLI. A shell with Python is optional, for MarkItDown conversions.
+compatibility: Needs Google Drive access (search, read, create, update/move files) and Google Docs access (read and batch-update with a revision ID), through connectors, MCP servers or a CLI. Optional - a shell with Python for MarkItDown conversions, and a bundled Apps Script for Shared Drives where the tools can't move files.
 metadata:
-  version: "0.2.0"
-  spec-version: "0.2"
+  version: "0.3.0"
+  spec-version: "0.2.1"
   homepage: "https://github.com/hounw/okf-drive"
 ---
 
@@ -20,7 +20,7 @@ Before any operation, confirm you can do each of these. The tool names differ by
 1. Search Drive by full text and by parent folder
 2. Read a file's content (Docs, PDFs, images)
 3. Create files and folders, and upload a file
-4. Rename and move a file (change its parent)
+4. Rename and move a file (change its parent), and set its description. If moves are refused somewhere (e.g. Claude's connector in Shared Drives), see [references/mover.md](references/mover.md)
 5. Read a Google Doc with its revision ID, and batch-update it with that revision ID
 
 If something is missing, say exactly which capability is missing and what it blocks, then continue with what works. Never fall back to writing into a locally synced Drive folder.
@@ -43,6 +43,7 @@ If this is the first time the person uses this skill, or they ask for help, foll
 10. **Language.** Reply in the person's language. Write docs in the language the README Notes set.
 11. **Listing folders:** always set a page size (e.g. 50) and follow next-page tokens; default pages can silently omit files.
 12. **Inbox by name.** A bundle's Inbox is `00 Inbox for <bundle folder name>`. To add a file to a bundle, search for that exact folder name and move the file there; don't walk the folder tree or open the README first.
+13. **Refused moves don't stop filing.** Index the file at its destination anyway. If the README Notes say a mover runs, tag the file `okf-move-to: <folder ID>` in its description; otherwise offer the mover, copy + trash, or a list of moves for the person. A file tagged `okf-move-to` is in transit, not new. Details: [references/mover.md](references/mover.md).
 
 ## What people can ask for
 

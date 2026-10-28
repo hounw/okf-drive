@@ -1,6 +1,8 @@
 # OKF-Drive specification
 
-Version 0.2 · Webifica · 2026-10-26
+Version 0.2.1 · Webifica · 2026-10-28
+
+Patch versions (0.2.x) add rules that 0.2 bundles already satisfy; READMEs keep `okf-drive: 0.2`.
 
 OKF-Drive is a format for project knowledge stored in Google Drive. It applies the [Open Knowledge Format (OKF)](https://agentic-ai.readthedocs.io/en/latest/Standards/open-knowledge-format/) to Google Docs. It defines which documents a project folder must contain, how they are arranged and linked, and the metadata each one carries. It does not define where folders live, how they are organized internally, or which AI agent reads them.
 
@@ -139,6 +141,7 @@ Every bundle has exactly one Inbox: a top-level subfolder named `00 Inbox for <b
 - **Filing empties it.** Filing gives each file a name, a place from the Structure, a summary or conversion if needed, an Index line and a Log line.
 - **Anything unindexed is Inbox material.** A file anywhere in the bundle that isn't in the Index is treated as if it were in the Inbox: filed or reported, never silently ignored.
 - **Agent-created docs** are created in place and indexed in the same step, so they skip the Inbox.
+- **Files in transit.** When an agent can file a file but its tools can't move it, it indexes the file at its destination and adds the line `okf-move-to: <destination folder ID>` to the file's Drive description. A tagged file is filed, not new material, even while it still sits in the Inbox. Whatever performs the move (a person, another tool, or a script such as the skill's mover) removes the line afterwards; if the move can't be done, it replaces it with `okf-move-error: <reason> (<YYYY-MM-DD>)`. Tags are temporary: a bundle at rest has none.
 
 Apart from the Inbox, subfolders are up to each bundle and described in its Structure.
 
@@ -166,7 +169,7 @@ A folder conforms to OKF-Drive 0.2 when:
 - [ ] A top-level folder named `00 Inbox for <bundle folder name>` exists, and `inbox` holds that name
 - [ ] The README has About, Notes, Structure, Index, Current state and Log, in that order
 - [ ] Every file and child bundle outside the Inbox appears in the Index with a link and one line
-- [ ] Files sit where the Structure says
+- [ ] Files sit where the Structure says, except files in transit (§7)
 - [ ] Every working doc is a Google Doc with a header carrying `type`, `description` and `updated`, and its type is listed in the Structure
 - [ ] Long reference files have a summary or conversion with `source`
 - [ ] Each child bundle conforms on its own and names its `parent`

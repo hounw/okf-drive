@@ -5,7 +5,7 @@ A standard and an agent skill for doing project work in Google Drive with any AI
 Every project is a Drive folder with a **README** doc (header, Structure, Index, Current state, Log) and an **Inbox** folder named after the project (`00 Inbox for <folder name>`), so an agent can drop a file into any project with one search. Any teammate's agent (Claude, ChatGPT, Hermes, OpenClaw, Codex and others) reads the README to pick up the project, files whatever lands in the Inbox, and keeps the README current. Folders can live anywhere in Drive and be organized however each project needs.
 
 - **Standard:** [SPEC.md](SPEC.md) (OKF-Drive 0.2, based on Google Cloud's [Open Knowledge Format](https://agentic-ai.readthedocs.io/en/latest/Standards/open-knowledge-format/))
-- **Skill:** [`okf-drive/`](okf-drive/) in the open [Agent Skills](https://agentskills.io) format (`SKILL.md` + `references/`)
+- **Skill:** [`okf-drive/`](okf-drive/) in the open [Agent Skills](https://agentskills.io) format (`SKILL.md` + `references/` + `scripts/`)
 - **Download:** `okf-drive.zip` from the [latest release](https://github.com/hounw/okf-drive/releases/latest)
 
 ## Quick start
@@ -30,11 +30,13 @@ Once installed, say **"help me with OKF-Drive"** and it walks you through setup 
 
 Agents without a built-in Google connector need a Google Workspace MCP server or API access. See [okf-drive/references/tools.md](okf-drive/references/tools.md).
 
+**Shared Drives:** some connectors can't move files there (Claude's Google Drive connector fails with "The caller does not have permission"). The skill still files everything and tags each file with its destination; a small Apps Script you install once moves tagged files every 5 minutes. See [okf-drive/references/mover.md](okf-drive/references/mover.md).
+
 ## For AI agents reading this page
 
 If a person asked you to install this skill:
 
-1. Install the `okf-drive/` folder of this repository (it contains `SKILL.md` and `references/`) into your skills directory, using the method for your platform above. If you cannot install skills yourself (e.g. claude.ai or ChatGPT web), tell the person to download `okf-drive.zip` from the latest release and upload it in their skills settings, or ask their admin.
+1. Install the `okf-drive/` folder of this repository (it contains `SKILL.md`, `references/` and `scripts/`) into your skills directory, using the method for your platform above. If you cannot install skills yourself (e.g. claude.ai or ChatGPT web), tell the person to download `okf-drive.zip` from the latest release and upload it in their skills settings, or ask their admin.
 2. Start a new session if your platform requires it, then follow `okf-drive/references/onboarding.md`.
 3. Do not copy any credentials or project data into the skill folder.
 
@@ -51,6 +53,9 @@ okf-drive/                 the skill
     operations.md          step-by-step procedures
     templates.md           README and doc templates
     large-files.md         MarkItDown conversions
+    mover.md               files in transit and the Apps Script mover
+  scripts/
+    okf-drive-mover/       Apps Script that moves tagged files (Code.gs, appsscript.json)
 scripts/
   build.sh                 sync spec, validate, build dist/okf-drive.zip
   validate.py              checks the skill against the Agent Skills format

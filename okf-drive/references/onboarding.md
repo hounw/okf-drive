@@ -37,6 +37,8 @@ Then run, recording pass/fail:
 | Stale edit guard | Send another edit with the old revision ID | It is rejected |
 | Log | Reread, append a Log line with the fresh revision ID | Edit succeeds |
 
+If they keep projects in a Shared Drive, ask for a folder there and repeat the File test with a second test note (moves can be refused in Shared Drives even when they work in My Drive). If the move is refused, explain it and offer the mover from [mover.md](mover.md).
+
 Report the results in a short table. If the stale-edit guard didn't reject, warn that two people editing the same doc at once could lose changes on this platform.
 
 Leave the test folder in place and tell them they can delete it.
